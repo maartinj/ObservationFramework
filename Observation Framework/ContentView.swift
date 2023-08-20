@@ -17,6 +17,8 @@ struct ContentView: View {
     private let name = "Stewart"
     @State private var number = 0
     @State private var isHappy = true
+    
+    @State private var user = User(name: "Emily", number: 10)
     var body: some View {
         VStack(spacing: 20) {
             HStack {
@@ -29,6 +31,18 @@ struct ContentView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.red)
                 Toggle("I am happy", isOn: $isHappy)
+            }
+            HStack {
+                Menu("\(user.name): \(user.number)") {
+                    ForEach(10..<20) { num in
+                        Button(String(num)) {
+                            user.number = num
+                        }
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+                Toggle("I am happy", isOn: $user.isHappy)
             }
         }
         .padding()
