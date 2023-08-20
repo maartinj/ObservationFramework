@@ -8,16 +8,28 @@
 // Subscribe on YouTube: https://youTube.com/@StewartLynch
 // Buy me a ko-fi:  https://ko-fi.com/StewartLynch
 
+// Link: https://www.youtube.com/watch?v=EuAGDhJpUN0&ab_channel=StewartLynch
+
 
 import SwiftUI
 
 struct ContentView: View {
+    private let name = "Stewart"
+    @State private var number = 0
+    @State private var isHappy = true
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 20) {
+            HStack {
+                Text("\(name) number:")
+                Button {
+                    number = Int.random(in: 0...9)
+                } label: {
+                    Text(String(number)).bold()
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.red)
+                Toggle("I am happy", isOn: $isHappy)
+            }
         }
         .padding()
     }
