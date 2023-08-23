@@ -13,9 +13,11 @@ import SwiftUI
 
 @main
 struct Observation_FrameworkApp: App {
+    @State private var appState = AppState()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartTabView()
+                .environment(appState)
         }
     }
 }

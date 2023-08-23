@@ -8,23 +8,29 @@
 import SwiftUI
 
 struct WithChildrenView: View {
+    @Environment(AppState.self) var appState
     private let name = "Aidan"
     @State private var number = 0
     @State private var isHappy = true
     
     @State private var user = User(name: "Rupert", number: 10)
     var body: some View {
-        VStack(spacing: 20) {
-            HStack1View(name: name, number: $number, isHappy: $isHappy)
-//            HStack2View(name: user.name, number: $user.number, isHappy: $user.isHappy)
-            HStack2View(user: user)
+        if appState.isLoggedIn {
+            VStack(spacing: 20) {
+                HStack1View(name: name, number: $number, isHappy: $isHappy)
+    //            HStack2View(name: user.name, number: $user.number, isHappy: $user.isHappy)
+                HStack2View(user: user)
+            }
+            .padding()
+        } else {
+            ContentUnavailableView("Log In", systemImage: "lock.fill")
         }
-        .padding()
     }
 }
 
 #Preview {
     WithChildrenView()
+        .environment(AppState())
 }
 
 struct HStack1View: View {
